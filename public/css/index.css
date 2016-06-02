@@ -1,0 +1,76 @@
+.wp {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.page {
+    text-align: center;
+    position: relative;
+    background-color: rgba(16, 31, 64, 1);
+    background-size: 100% 100%;
+}
+
+.page2 {
+    background-image: url("../images/time.png");
+}
+
+.page3 {
+    background-image: url("../images/borrow.png");
+}
+
+.page4 {
+    background-image: url('../images/pay.png');
+}
+
+
+.arrow {
+	position: absolute;
+    bottom: 20px;
+    left: 45%;
+    width: 10%;
+    -webkit-animation: arrow 1.5s linear infinite;
+}
+
+@-webkit-keyframes arrow {
+    0%    {opacity: 0; -webkit-transform: translate3d(0, 0, 0);}
+    100%  {opacity: 1; -webkit-transform: translate3d(0, -20px, 0);}
+}
+
+.message {
+	color: white;
+	font-size: 16px;
+	position: absolute;
+	width: 300px;
+	left: 50%;
+	margin-left: -150px;
+}
+
+.page2 .message {
+	bottom: 100px;
+}
+
+.money {
+	font-size: 36px;
+	margin-top: 12px;
+}
+
+#days, #books, #cards, #schools {
+	color: rgba(249, 115, 17, 1);
+	font-size: 36px;
+}
+
+#percent {
+	color: rgba(249, 115, 17, 1);
+}
+
+.page3 .message {
+	top: 50px;
+}
+
+.page4 .message {
+	top: 100px ;
+}
