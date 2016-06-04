@@ -10,6 +10,7 @@
   "license": "MIT",
   "devDependencies": {
     "body-parser": "^1.15.1",
+    "cheerio": "^0.20.0",
     "css-loader": "^0.23.1",
     "express": "^4.13.4",
     "file-loader": "^0.8.5",

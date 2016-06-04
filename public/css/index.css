@@ -1,3 +1,26 @@
+.fullPage-wp{   
+    -webkit-transform: translate3d(0,0,0);     
+    transform: translate3d(0,0,0);     
+}
+.fullPage-wp:after {
+    display: block;
+    content: ' ';
+    height: 0;
+    clear: both;
+}
+.fullPage-wp.anim{
+    -webkit-transition: all 500ms ease-out 0s;
+    transition: all 500ms ease-out 0s; 
+}
+.fullPage-page{
+    display: block;
+    overflow: hidden;
+}
+
+.fullPage-dir-h {
+    float: left;
+}
+
 .wp {
     position: absolute;
     top: 0;
@@ -14,15 +37,37 @@
     background-size: 100% 100%;
 }
 
+input {
+    border-top-style: none;
+    border-right-style: none;
+    border-left-style: none;
+    border-bottom: 1px solid #ccc;
+    background-color: transparent;
+    outline: none;
+    width: 75%;
+    color: white;
+    font-size: 16px;
+    height: 25px;
+    margin-left: 15px;
+}
+
+.page1 {
+    background-image: url("../images/main.png");
+}
+
 .page2 {
-    background-image: url("../images/time.png");
+    background-image: url("../images/background.png");
 }
 
 .page3 {
-    background-image: url("../images/borrow.png");
+    background-image: url("../images/time.png");
 }
 
 .page4 {
+    background-image: url("../images/borrow.png");
+}
+
+.page5 {
     background-image: url('../images/pay.png');
 }
 
@@ -49,7 +94,7 @@
 	margin-left: -150px;
 }
 
-.page2 .message {
+.page3 .message {
 	bottom: 100px;
 }
 
@@ -67,10 +112,37 @@
 	color: rgba(249, 115, 17, 1);
 }
 
-.page3 .message {
+.page4 .message {
 	top: 50px;
 }
 
-.page4 .message {
+.page5 .message {
 	top: 100px ;
+}
+
+.warn {
+    position: absolute;
+    top: 30%;
+    width: 100%;
+    text-align: center;
+    color: #ccc;
+    font-size: 14px;
+}
+
+.form {
+    position: relative;
+    top: 45%;
+    color: white;
+    width: 70%;
+    margin: 0 auto;
+}
+
+#bt {
+    margin-top: 30px;
+    border: 1px solid white;
+    width: 100%;
+    display: block;
+    border-radius: 20px;
+    height: 42px;
+    line-height: 42px;
 }

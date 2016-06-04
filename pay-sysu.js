@@ -3,9 +3,11 @@ module.exports = (function() {
 	"use strict";
 
 	let http = require('http');
+	let https = require('https');
 	let fs = require('fs');
 	let tesseract = require('node-tesseract');
 	let gm = require('gm');
+	let cheerio = require('cheerio');
 
 	let cookieOperator = {
 		queryItem: function(cookie, key) {
@@ -28,6 +30,8 @@ module.exports = (function() {
 		this.validateCode = null;
 		this.sum = null;
 		this.loginType = loginType || 0;
+		this.lt = null;
+		this.execution = null;
 	}
 
 	AutoSpider.prototype = {
@@ -122,7 +126,6 @@ module.exports = (function() {
 			
 			let req = http.request(options, function(res) {
 				if (res.headers.location.indexOf('login') >= 0) {
-					console.log(res.headers.location, res.headers.location.substr(-1));
 					reject(parseInt(res.headers.location.substr(-1)));
 				} else {
 					resolve();
@@ -193,19 +196,19 @@ module.exports = (function() {
 		}).then(function() {
 			return new Promise(spider.getSum.bind(spider));
 		}).then(function() {
-			success(spider.sum)
+			success(spider.sum);
 		}).catch(function(e) {
 			if (e === 2) {
 				init(id, password, success, fail); //验证码错误
 			} else if (e === 1) {
 				// 帐号密码错误
 				fail();
-				console.log("帐号密码错误");
 			} else {
 				console.log('error catched ', e);
 			}
 		});
 	}
+
 
 	return init;
 

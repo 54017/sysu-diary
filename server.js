@@ -6,6 +6,8 @@
 
 	let getPaySum = require('./pay-sysu.js');
 
+	let getLibSum = require('./lib-sysu.js');
+
 	let express = require('express'),
 		app = express(),
 		path = require('path'),
@@ -27,37 +29,56 @@
 		let username = req.body.username,
 			password = req.body.password,
 			flag = 0;
-		let payCode, paySum, cardCode, cardSum;
+		let payCode, paySum, cardCode, cardSum, bookCode, bookSum;
+		//当字段为空时，在pay-sysu中判断登录成功的条件会有异常
+		username = username == '' ? 0 : username; 
+		password = password == '' ? 0 : password;
 		getPaySum(username, password, function(sum) {
 			paySum = sum;
 			payCode = 0;
-			if (flag) {
-				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum  });
+			if (flag === 2) {
+				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum  });
 			}
-			flag = 1;
+			flag++;
 		}, function(err) {
 			payCode = 1;
 			paySum = -1;
-			if (flag) {
-				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum  });
+			if (flag === 2) {
+				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum  });
 			}
-			flag = 1;
+			flag++;
 		});
 		getCardSum(username, password, function(sum) {
 			cardSum = sum;
 			cardCode = 0;
-			if (flag) {
-				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum  });
+			if (flag === 2) {
+				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum  });
 			}
-			flag = 1;
+			flag++;
 		}, function(err) {
 			cardCode = 1;
 			cardSum = -1;
-			if (flag) {
-				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum  });
+			if (flag === 2) {
+				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum  });
 			}
-			flag = 1;
+			flag++;
 		});
+		getLibSum(username, password, function(sum) {
+			bookSum = sum.total;
+			bookCode = 0;
+			if (flag === 2) {
+				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum  });
+			}
+			flag++;
+		}, function(err) {
+			bookSum = 0;
+			bookCode = 1;
+			if (flag === 2) {
+				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum  });
+			}
+			flag++;
+		})
+		
 	});
 
 

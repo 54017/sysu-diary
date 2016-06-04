@@ -272,7 +272,6 @@ module.exports = (function() {
 			console.log("ok", mySpider.sum);
 			success(mySpider.sum);
 		}).catch(function(e) {
-			console.log("err", e);
 			if (e === 1) {
 				fail();
 			}

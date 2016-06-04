@@ -8,14 +8,27 @@
 
 	require('./css/index.css');
 
-	$('.wp-inner').fullpage();
+	$('.wp-inner').fullpage({
+		duration: 0,
+		beforeChange: function(e) {
+			if (e.cur === 2 && e.next === 1) {
+				return false;
+			}
+		},
+		afterChange: function(e) {
+			if (e.cur === 1) {
+				$.fn.fullpage.stop();
+			}
+		}
+	});
 
 	$('#bt').click(function() {
 		let username = $('#username').val(),
 			password = $('#password').val();
-		console.log(username, password)
-		$.post("/data", { username: username, password: password}, function(data) {
+		$.post("/data", { username: username, password: password }, function(data) {
 			console.log(data);
+			$.fn.fullpage.start();
+			$.fn.fullpage.moveNext();
 			if (data.cardCode === 0) {
 				$('#cards').text(Math.abs(data.cardSum));
 			} else {
@@ -25,6 +38,11 @@
 				$('#schools').text(data.paySum);
 			} else {
 				$('#schools').text("错误");
+			}
+			if (data.bookCode === 0) {
+				$('#books').text(data.bookSum);
+			} else {
+				$('#books').text("错误");
 			}
 		});
 	})

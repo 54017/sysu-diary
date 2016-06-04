@@ -54,13 +54,27 @@
 
 		__webpack_require__(3);
 
-		$('.wp-inner').fullpage();
+		$('.wp-inner').fullpage({
+			duration: 0,
+			beforeChange: function(e) {
+				if (e.cur === 2 && e.next === 1) {
+					return false;
+				}
+			},
+			afterChange: function(e) {
+				if (e.cur === 1) {
+					$.fn.fullpage.stop();
+				}
+			}
+		});
 
 		$('#bt').click(function() {
 			let username = $('#username').val(),
 				password = $('#password').val();
-			console.log(username, password)
-			$.post("/data", { username: username, password: password}, function(data) {
+			$.post("/data", { username: username, password: password }, function(data) {
+				console.log(data);
+				$.fn.fullpage.start();
+				$.fn.fullpage.moveNext();
 				if (data.cardCode === 0) {
 					$('#cards').text(Math.abs(data.cardSum));
 				} else {
@@ -70,6 +84,11 @@
 					$('#schools').text(data.paySum);
 				} else {
 					$('#schools').text("错误");
+				}
+				if (data.bookCode === 0) {
+					$('#books').text(data.bookSum);
+				} else {
+					$('#books').text("错误");
 				}
 			});
 		})
@@ -340,7 +359,7 @@
 	var content = __webpack_require__(4);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(9)(content, {});
+	var update = __webpack_require__(11)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -365,7 +384,7 @@
 
 
 	// module
-	exports.push([module.id, ".wp {\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    overflow: hidden;\n}\n\n.page {\n    text-align: center;\n    position: relative;\n    background-color: rgba(16, 31, 64, 1);\n    background-size: 100% 100%;\n}\n\n.page2 {\n    background-image: url(" + __webpack_require__(6) + ");\n}\n\n.page3 {\n    background-image: url(" + __webpack_require__(7) + ");\n}\n\n.page4 {\n    background-image: url(" + __webpack_require__(8) + ");\n}\n\n\n.arrow {\n\tposition: absolute;\n    bottom: 20px;\n    left: 45%;\n    width: 10%;\n    -webkit-animation: arrow 1.5s linear infinite;\n}\n\n@-webkit-keyframes arrow {\n    0%    {opacity: 0; -webkit-transform: translate3d(0, 0, 0);}\n    100%  {opacity: 1; -webkit-transform: translate3d(0, -20px, 0);}\n}\n\n.message {\n\tcolor: white;\n\tfont-size: 16px;\n\tposition: absolute;\n\twidth: 300px;\n\tleft: 50%;\n\tmargin-left: -150px;\n}\n\n.page2 .message {\n\tbottom: 100px;\n}\n\n.money {\n\tfont-size: 36px;\n\tmargin-top: 12px;\n}\n\n#days, #books, #cards, #schools {\n\tcolor: rgba(249, 115, 17, 1);\n\tfont-size: 36px;\n}\n\n#percent {\n\tcolor: rgba(249, 115, 17, 1);\n}\n\n.page3 .message {\n\ttop: 50px;\n}\n\n.page4 .message {\n\ttop: 100px ;\n}", ""]);
+	exports.push([module.id, ".fullPage-wp{   \n    -webkit-transform: translate3d(0,0,0);     \n    transform: translate3d(0,0,0);     \n}\n.fullPage-wp:after {\n    display: block;\n    content: ' ';\n    height: 0;\n    clear: both;\n}\n.fullPage-wp.anim{\n    -webkit-transition: all 500ms ease-out 0s;\n    transition: all 500ms ease-out 0s; \n}\n.fullPage-page{\n    display: block;\n    overflow: hidden;\n}\n\n.fullPage-dir-h {\n    float: left;\n}\n\n.wp {\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    overflow: hidden;\n}\n\n.page {\n    text-align: center;\n    position: relative;\n    background-color: rgba(16, 31, 64, 1);\n    background-size: 100% 100%;\n}\n\ninput {\n    border-top-style: none;\n    border-right-style: none;\n    border-left-style: none;\n    border-bottom: 1px solid #ccc;\n    background-color: transparent;\n    outline: none;\n    width: 75%;\n    color: white;\n    font-size: 16px;\n    height: 25px;\n    margin-left: 15px;\n}\n\n.page1 {\n    background-image: url(" + __webpack_require__(6) + ");\n}\n\n.page2 {\n    background-image: url(" + __webpack_require__(7) + ");\n}\n\n.page3 {\n    background-image: url(" + __webpack_require__(8) + ");\n}\n\n.page4 {\n    background-image: url(" + __webpack_require__(9) + ");\n}\n\n.page5 {\n    background-image: url(" + __webpack_require__(10) + ");\n}\n\n\n.arrow {\n\tposition: absolute;\n    bottom: 20px;\n    left: 45%;\n    width: 10%;\n    -webkit-animation: arrow 1.5s linear infinite;\n}\n\n@-webkit-keyframes arrow {\n    0%    {opacity: 0; -webkit-transform: translate3d(0, 0, 0);}\n    100%  {opacity: 1; -webkit-transform: translate3d(0, -20px, 0);}\n}\n\n.message {\n\tcolor: white;\n\tfont-size: 16px;\n\tposition: absolute;\n\twidth: 300px;\n\tleft: 50%;\n\tmargin-left: -150px;\n}\n\n.page3 .message {\n\tbottom: 100px;\n}\n\n.money {\n\tfont-size: 36px;\n\tmargin-top: 12px;\n}\n\n#days, #books, #cards, #schools {\n\tcolor: rgba(249, 115, 17, 1);\n\tfont-size: 36px;\n}\n\n#percent {\n\tcolor: rgba(249, 115, 17, 1);\n}\n\n.page4 .message {\n\ttop: 50px;\n}\n\n.page5 .message {\n\ttop: 100px ;\n}\n\n.warn {\n    position: absolute;\n    top: 30%;\n    width: 100%;\n    text-align: center;\n    color: #ccc;\n    font-size: 14px;\n}\n\n.form {\n    position: relative;\n    top: 45%;\n    color: white;\n    width: 70%;\n    margin: 0 auto;\n}\n\n#bt {\n    margin-top: 30px;\n    border: 1px solid white;\n    width: 100%;\n    display: block;\n    border-radius: 20px;\n    height: 42px;\n    line-height: 42px;\n}", ""]);
 
 	// exports
 
@@ -430,22 +449,34 @@
 /* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "4aec61bba3b3f4e0e193dbed317674d5.png";
+	module.exports = __webpack_require__.p + "30c1c788e72419cb5848c96eae5859f1.png";
 
 /***/ },
 /* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "613f8e43104cd042dc2a9ea4bb377883.png";
+	module.exports = __webpack_require__.p + "cddf9c28e69858459cd056e7fdac5d9c.png";
 
 /***/ },
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "3c5cbee8002355cf683a5c5c6799fa80.png";
+	module.exports = __webpack_require__.p + "4aec61bba3b3f4e0e193dbed317674d5.png";
 
 /***/ },
 /* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "613f8e43104cd042dc2a9ea4bb377883.png";
+
+/***/ },
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "3c5cbee8002355cf683a5c5c6799fa80.png";
+
+/***/ },
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
