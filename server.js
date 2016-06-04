@@ -25,11 +25,56 @@
 
 	app.use(bodyParser.urlencoded({ extended: true }));
 
+	app.post('/book', function(req, res) {
+		let username = req.body.username,
+			password = req.body.password;
+		getLibSum(username, password, function(sum) {
+			bookSum = sum.total;
+			bookCode = 0;
+			res.send({ bookCode: bookCode, bookSum: bookSum });
+		}, function(err) {
+			bookSum = 0;
+			bookCode = 1;
+			res.send({ bookCode: bookCode, bookSum: bookSum });
+		});
+	});
+
+	app.post('/card', function(req, res) {
+		let username = req.body.username,
+			password = req.body.password,
+		let cardCode, cardSum;
+		getCardSum(username, password, function(sum) {
+			cardSum = sum;
+			cardCode = 0;
+			res.send({ cardCode: cardCode, cardSum: cardSum });
+		}, function(err) {
+			cardCode = 1;
+			cardSum = -1;
+			res.send({ cardCode: cardCode, cardSum: cardSum });
+		});
+	});
+
+	app.post('/pay', function(req, res) {
+		let username = req.body.username,
+			password = req.body.password,
+		let payCode, paySum;
+		//当字段为空时，在pay-sysu中判断登录成功的条件会有异常
+		username = username == '' ? 0 : username; 
+		password = password == '' ? 0 : password;
+		getPaySum(username, password, function(sum) {
+			paySum = sum;
+			payCode = 0;
+			res.send({ payCode: payCode, paySum: paySum });
+		}, function(err) {
+			payCode = 1;
+			paySum = -1;
+			res.send({ payCode: payCode, paySum: paySum });
+	});
+
 	app.post('/data', function(req, res) {
 		let username = req.body.username,
 			password = req.body.password,
-			flag = 0;
-		let payCode, paySum, cardCode, cardSum, bookCode, bookSum;
+		let bookCode, bookSum, cardCode, cardSum, payCode, paySum;
 		//当字段为空时，在pay-sysu中判断登录成功的条件会有异常
 		username = username == '' ? 0 : username; 
 		password = password == '' ? 0 : password;
@@ -48,6 +93,7 @@
 			}
 			flag++;
 		});
+
 		getCardSum(username, password, function(sum) {
 			cardSum = sum;
 			cardCode = 0;
@@ -63,6 +109,7 @@
 			}
 			flag++;
 		});
+
 		getLibSum(username, password, function(sum) {
 			bookSum = sum.total;
 			bookCode = 0;
@@ -77,7 +124,7 @@
 				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum  });
 			}
 			flag++;
-		})
+		});
 		
 	});
 
