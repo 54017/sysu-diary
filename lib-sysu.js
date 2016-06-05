@@ -121,7 +121,12 @@ module.exports = (function() {
                     data += chunk.toString();
                 })
                 res.on('end', function() {
-                    resolve();
+                    if(data.indexOf("证号或密码错误") != -1)
+                        // login fail
+                        reject(1);
+                    else {
+                        resolve();
+                    }
                 })
                 res.on('error', function(err) {
                     console.log('err in library login: ', err)
