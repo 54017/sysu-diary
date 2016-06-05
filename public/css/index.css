@@ -71,6 +71,10 @@ input {
     background-image: url('../images/pay.png');
 }
 
+.page6 {
+    background-image: url('../images/last.png');
+}
+
 
 .arrow {
 	position: absolute;
@@ -113,7 +117,7 @@ input {
 }
 
 .page4 .message {
-	top: 50px;
+	top: 100px;
 }
 
 .page5 .message {
@@ -146,3 +150,84 @@ input {
     height: 42px;
     line-height: 42px;
 }
+
+
+
+.show {
+    visibility: visible;
+}
+
+.mask {
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    background-color: rgba(47, 47, 47, 0.5);
+    top: 0;
+}
+
+.toast {
+    position: absolute;
+    bottom: 33%;
+    left: 50%;
+    margin-left: -125px;
+    color: #ccc;
+    width: 250px;
+    font-size: 14px;
+}
+
+.toast img {
+    width: 250px;
+
+}
+
+.toast .retry {
+    position: absolute;
+    text-align: center;
+    margin: auto;
+    top: 10px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.reput, .jump {
+    display: block;
+    width: 125px;
+    height: 50px;
+    position: absolute;
+    margin-top: -46px;
+    line-height: 46px;
+}
+
+.reput {
+    left: 0;
+}
+
+.jump {
+    right: 0;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.building {
+    width: 60%;
+    position: absolute;
+    margin: auto;
+    top: 80px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    -webkit-animation: building 4s linear infinite;
+}
+
+@-webkit-keyframes building {
+    0%    { -webkit-transform: translate3d(0, 0, 0); }
+    50%  { -webkit-transform: translate3d(0, -20px, 0); }
+    100% { -webkit-transform: translate3d(0, 0, 0); }
+}
+
+
+
+

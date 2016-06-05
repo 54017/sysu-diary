@@ -28,6 +28,7 @@
 	app.post('/book', function(req, res) {
 		let username = req.body.username,
 			password = req.body.password;
+		let bookCode, bookSum;
 		getLibSum(username, password, function(sum) {
 			bookSum = sum.total;
 			bookCode = 0;
@@ -42,7 +43,7 @@
 	app.post('/card', function(req, res) {
 		let username = req.body.username,
 			password = req.body.password,
-		let cardCode, cardSum;
+			cardCode, cardSum;
 		getCardSum(username, password, function(sum) {
 			cardSum = sum;
 			cardCode = 0;
@@ -56,7 +57,7 @@
 
 	app.post('/pay', function(req, res) {
 		let username = req.body.username,
-			password = req.body.password,
+			password = req.body.password;
 		let payCode, paySum;
 		//当字段为空时，在pay-sysu中判断登录成功的条件会有异常
 		username = username == '' ? 0 : username; 
@@ -69,12 +70,20 @@
 			payCode = 1;
 			paySum = -1;
 			res.send({ payCode: payCode, paySum: paySum });
+		});
 	});
 
 	app.post('/data', function(req, res) {
 		let username = req.body.username,
-			password = req.body.password,
+			password = req.body.password;
 		let bookCode, bookSum, cardCode, cardSum, payCode, paySum;
+		let flag = 0;
+		let days = 0;
+		let temp = "20" + username.substr(0, 2);
+		let inDate = new Date()
+
+		inDate.setFullYear(parseInt(temp), 8, 15);
+		days = parseInt((new Date() - inDate) / 86400000);
 		//当字段为空时，在pay-sysu中判断登录成功的条件会有异常
 		username = username == '' ? 0 : username; 
 		password = password == '' ? 0 : password;
@@ -82,14 +91,14 @@
 			paySum = sum;
 			payCode = 0;
 			if (flag === 2) {
-				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum  });
+				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum, days: days  });
 			}
 			flag++;
 		}, function(err) {
 			payCode = 1;
 			paySum = -1;
 			if (flag === 2) {
-				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum  });
+				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum, days: days  });
 			}
 			flag++;
 		});
@@ -98,14 +107,14 @@
 			cardSum = sum;
 			cardCode = 0;
 			if (flag === 2) {
-				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum  });
+				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum, days: days  });
 			}
 			flag++;
 		}, function(err) {
 			cardCode = 1;
 			cardSum = -1;
 			if (flag === 2) {
-				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum  });
+				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum, days: days  });
 			}
 			flag++;
 		});
@@ -114,14 +123,14 @@
 			bookSum = sum.total;
 			bookCode = 0;
 			if (flag === 2) {
-				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum  });
+				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum, days: days  });
 			}
 			flag++;
 		}, function(err) {
 			bookSum = 0;
 			bookCode = 1;
 			if (flag === 2) {
-				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum  });
+				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum, days: days  });
 			}
 			flag++;
 		});

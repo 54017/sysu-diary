@@ -11,6 +11,7 @@
 		<div class="wp-inner">
 			<div class="page page1">
 				<img class="arrow" src="./images/arrow.png">
+				<img class="building" src="./images/building.png">
 			</div>
 			<div class="page page2">
 				<p class="warn">请输入学号密码获取数据</p>
@@ -18,6 +19,17 @@
 					<p class="in">学号 <input type="text" id="username" /></p>
 					<p class="in">密码 <input type="password" id="password" /></p>
 					<a id="bt">L o g i n</a>
+				</div>
+				<div class="mask hidden" id="log-mask">
+					<div class="toast">
+						<img src="./images/log-toast.png">
+						<div class="retry">
+							<p>输入的学号密码错误</p>
+							<p>请重新输入</p>
+						</div>
+						<span class="reput" data-type="log" >重新输入</span>
+						<span class="jump" id="first-jump">跳过</span>
+					</div>
 				</div>
 			</div>
 			<div class="page page3">
@@ -31,9 +43,20 @@
 				<div class="message">
 					<span>大学四年共借阅书籍</span>
 					<p><span id="books">10</span> 本</p>
-					<p>击败了<span id="percent"> 95% </span>的中大毕业生</p>
 				</div>
 				<img class="arrow" src="./images/arrow.png">
+				<div class="mask hidden" id="book-mask">
+					<div class="toast">
+						<img src="./images/toast.png">
+						<div class="retry">
+							<p>当前页面信息来自另一个系统</p>
+							<p>请输入正确的学号密码获取</p>
+							<p>当前的页面信息</p>
+						</div>
+						<span class="reput" data-type="book">重新获取</span>
+						<span class="jump">跳过</span>
+					</div>
+				</div>
 			</div>
 			<div class="page page5">
 				<div class="message">
@@ -43,6 +66,20 @@
 					<p class="money">¥<span id="schools"> 2131</span></p>
 				</div>
 				<img class="arrow" src="./images/arrow.png">
+				<div class="mask hidden" id="money-mask">
+					<div class="toast">
+						<img src="./images/toast.png">
+						<div class="retry">
+							<p>当前页面信息来自另一个系统</p>
+							<p>请输入正确的学号密码获取</p>
+							<p>当前的页面信息</p>
+						</div>
+						<span class="reput" data-type="money">重新获取</span>
+						<span class="jump">跳过</span>
+					</div>
+				</div>
+			</div>
+			<div class="page page6">
 			</div>
 		</div>
 	</div>

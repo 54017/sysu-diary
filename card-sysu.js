@@ -228,12 +228,17 @@ module.exports = (function() {
 				let req = http.request(options, function(res) {
 					let result = '';
 					res.on('data', function(chunk) {
-						result = result + chunk.toString('utf-8');
+						result = result + chunk.toString('utf8');
 					});
 					res.on('end', function() {
 						++count;
 						if (count === 12) {
-							result = JSON.parse(result);
+							try {
+								result = JSON.parse(result);
+							} catch(e) {
+								console.log("error in card: " , e);
+								result.total = 0;
+							}
 							let total = result.total;
 							for (let j = 0; j < total; ++j) {
 
