@@ -56,7 +56,7 @@
 
 		__webpack_require__(13);
 
-		let flag = 1, type ="", chinese;
+		let flag = 1, type ="", chinese, typeTwo = "";
 
 		let $cards = $('#cards'),
 			$schools = $('#schools'),
@@ -97,17 +97,6 @@
 			});
 		}
 
-		Ajax.prototype.getCard = function(resolve, reject) {
-			$.post("/card", { username: this.username, password: this.password }, function(data) {
-				if (data.cardCode === 0) {
-					$cards.text(data.cardSum);
-					resolve();
-				} else {
-					reject();
-				}
-			});
-		}
-
 		Ajax.prototype.getPay = function(resolve, reject) {
 			console.log("get pay", this.username);
 			try {
@@ -125,38 +114,6 @@
 			}
 		}
 
-		Ajax.prototype.getBoth = function(resolve, reject) {
-			let flag = 0;
-			$.post("/card", { username: this.username, password: this.password }, function(data) {
-				if (data.cardCode === 0) {
-					$cards.text(data.cardSum);
-					if (flag) {
-						resolve();
-					}
-					flag = 1;
-				} else {
-					if (flag === 2) {
-						reject();
-					}
-					flag = 2;
-				}
-			});
-			$.post("/pay", { username: this.username, password: this.password }, function(data) {
-				if (data.payCode === 0) {
-					$schools.text(data.paySum);
-					if (flag) {
-						resolve();
-					}
-					flag = 1;
-				} else {
-					if (flag === 2) {
-						reject();
-					}
-					flag = 2;
-				}
-			});
-		}
-
 		$('#bt').tap(function() {
 			if (!flag) {
 				return;
@@ -165,30 +122,8 @@
 			let username = $('#username').val(),
 				password = $('#password').val();
 			let ajax = new Ajax(username, password);
-			if (type === 'money') {
-				if ($cards.text() === '*****' && $schools.text() === '*****') {
-					new Promise(ajax.getBoth.bind(ajax)).then(function() {
-						$.fn.fullpage.moveTo(4);
-						$logMask.addClass('hidden');
-						flag = 1;
-						$.fn.fullpage.start();
-					}).catch(function() {
-						$logMask.removeClass('hidden');
-						flag = 1;
-						$.fn.fullpage.start();
-					});
-				} else if ($cards.text() === '*****') {
-					new Promise(ajax.getCard.bind(ajax)).then(function() {
-						$.fn.fullpage.moveTo(4);
-						$logMask.addClass('hidden');
-						flag = 1;
-						$.fn.fullpage.start();
-					}).catch(function(e) {
-						$logMask.removeClass('hidden');
-						flag = 1;
-						$.fn.fullpage.start();
-					})
-				} else if ($schools.text() === '*****') {
+			if (typeTwo === 'money') {
+				if ($schools.text() === '*****') {
 					new Promise(ajax.getPay.bind(ajax)).then(function() {
 						$.fn.fullpage.moveTo(4);
 						$logMask.addClass('hidden');
@@ -200,7 +135,7 @@
 						$.fn.fullpage.start();
 					});
 				}
-			} else if (type === 'book') {
+			} else if (typeTwo === 'book') {
 				new Promise(ajax.getBook.bind(ajax)).then(function() {
 					$.fn.fullpage.moveTo(3);
 					$logMask.addClass('hidden');
@@ -217,12 +152,6 @@
 					flag = 1;
 					$.fn.fullpage.start();
 					$.fn.fullpage.moveNext(true);
-					if (data.cardCode === 0) {
-						$cards.text(Math.abs(data.cardSum).toFixed(2));
-					} else {
-						$cards.text("*****");
-						$moneyMask.removeClass('hidden');
-					}
 					if (data.payCode === 0) {
 						$schools.text(data.paySum.toFixed(2));
 					} else {
@@ -242,17 +171,18 @@
 
 		$('.reput').tap(function() {
 			type = this.getAttribute('data-type');
-			console.log(type);
+			typeTwo = typeTwo || type;
+			console.log(type, typeTwo);
 			if (type === 'book') {
 				chinese = '借阅';
-				cur = 2;
-			} else if(type === 'money') {
-				chinese = '学杂费或消费'
 				cur = 3;
+			} else if(type === 'money') {
+				chinese = '学杂费'
+				cur = 4;
 			} else {
 				$logMask.removeClass('hidden');
 			}
-			$('.mask').addClass('hidden');
+			$('#' + type + '-mask').addClass('hidden');
 			$('.warn').html('无法获取你的<span id="type">' + chinese + '</span>纪录');
 			$.fn.fullpage.moveTo(1);
 		});
@@ -623,37 +553,37 @@
 /* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "304620ed39920e636eb7eb078cf2eb9b.png";
+	module.exports = __webpack_require__.p + "8b3280e94aa92896063f99fdf915ce0b.png";
 
 /***/ },
 /* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "cddf9c28e69858459cd056e7fdac5d9c.png";
+	module.exports = __webpack_require__.p + "dbeecc1efad36ae66700b8a8bb2166b3.png";
 
 /***/ },
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "4aec61bba3b3f4e0e193dbed317674d5.png";
+	module.exports = __webpack_require__.p + "4108b699685fbc214026cf8fb410017b.png";
 
 /***/ },
 /* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "613f8e43104cd042dc2a9ea4bb377883.png";
+	module.exports = __webpack_require__.p + "aee3a8e011cc9e30f882d5311ac06378.png";
 
 /***/ },
 /* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "fa3c7f0a48c51d729ab5d697d65a339c.png";
+	module.exports = __webpack_require__.p + "201ddd54194f4fa5d068de15f84e6252.png";
 
 /***/ },
 /* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "07594b70174d8b3000044335b46558a7.png";
+	module.exports = __webpack_require__.p + "3c27d5126b9f045d61844f2e4af0dd12.png";
 
 /***/ },
 /* 12 */

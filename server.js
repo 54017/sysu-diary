@@ -2,7 +2,6 @@
 
 	"use strict";
 
-	let getCardSum = require('./card-sysu.js');
 
 	let getPaySum = require('./pay-sysu.js');
 
@@ -40,21 +39,6 @@
 		});
 	});
 
-	app.post('/card', function(req, res) {
-		let username = req.body.username,
-			password = req.body.password,
-			cardCode, cardSum;
-		getCardSum(username, password, function(sum) {
-			cardSum = sum;
-			cardCode = 0;
-			res.send({ cardCode: cardCode, cardSum: cardSum });
-		}, function(err) {
-			cardCode = 1;
-			cardSum = -1;
-			res.send({ cardCode: cardCode, cardSum: cardSum });
-		});
-	});
-
 	app.post('/pay', function(req, res) {
 		let username = req.body.username,
 			password = req.body.password;
@@ -76,7 +60,7 @@
 	app.post('/data', function(req, res) {
 		let username = req.body.username,
 			password = req.body.password;
-		let bookCode, bookSum, cardCode, cardSum, payCode, paySum;
+		let bookCode, bookSum, payCode, paySum;
 		let flag = 0;
 		let days = 0;
 		let temp = "20" + username.substr(0, 2);
@@ -90,49 +74,33 @@
 		getPaySum(username, password, function(sum) {
 			paySum = sum;
 			payCode = 0;
-			if (flag === 2) {
-				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum, days: days  });
+			if (flag === 1) {
+				res.send({ payCode: payCode, paySum: paySum, bookCode: bookCode, bookSum: bookSum, days: days  });
 			}
-			flag++;
+			flag = 1;
 		}, function(err) {
 			payCode = 1;
 			paySum = -1;
-			if (flag === 2) {
-				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum, days: days  });
+			if (flag === 1) {
+				res.send({ payCode: payCode, paySum: paySum, bookCode: bookCode, bookSum: bookSum, days: days  });
 			}
-			flag++;
-		});
-
-		getCardSum(username, password, function(sum) {
-			cardSum = sum;
-			cardCode = 0;
-			if (flag === 2) {
-				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum, days: days  });
-			}
-			flag++;
-		}, function(err) {
-			cardCode = 1;
-			cardSum = -1;
-			if (flag === 2) {
-				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum, days: days  });
-			}
-			flag++;
+			flag = 1;
 		});
 
 		getLibSum(username, password, function(sum) {
 			bookSum = sum.total;
 			bookCode = 0;
 			if (flag === 2) {
-				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum, days: days  });
+				res.send({ payCode: payCode, paySum: paySum, bookCode: bookCode, bookSum: bookSum, days: days  });
 			}
-			flag++;
+			flag = 1;
 		}, function(err) {
 			bookSum = 0;
 			bookCode = 1;
 			if (flag === 2) {
-				res.send({ payCode: payCode, paySum: paySum, cardCode: cardCode, cardSum: cardSum, bookCode: bookCode, bookSum: bookSum, days: days  });
+				res.send({ payCode: payCode, paySum: paySum, bookCode: bookCode, bookSum: bookSum, days: days  });
 			}
-			flag++;
+			flag = 1;
 		});
 		
 	});
