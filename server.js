@@ -13,7 +13,7 @@
 		http = require('http').Server(app),
 		bodyParser = require('body-parser');
 
-	http.listen(3000);
+	http.listen(80);
 
 	//中间件提供静态资源 js/css/image 等， 会解析public文件夹下的文件
 	app.use(express.static(path.join(__dirname, 'public')));
@@ -90,14 +90,14 @@
 		getLibSum(username, password, function(sum) {
 			bookSum = sum.total;
 			bookCode = 0;
-			if (flag === 2) {
+			if (flag === 1) {
 				res.send({ payCode: payCode, paySum: paySum, bookCode: bookCode, bookSum: bookSum, days: days  });
 			}
 			flag = 1;
 		}, function(err) {
 			bookSum = 0;
 			bookCode = 1;
-			if (flag === 2) {
+			if (flag === 1) {
 				res.send({ payCode: payCode, paySum: paySum, bookCode: bookCode, bookSum: bookSum, days: days  });
 			}
 			flag = 1;

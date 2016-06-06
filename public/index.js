@@ -6,8 +6,6 @@
 
 	require('./zepto.fullpage.js');
 
-	require('./css/index.css');
-
 	require('./touch.js');
 
 	let flag = 1, type ="", chinese, typeTwo = "";
