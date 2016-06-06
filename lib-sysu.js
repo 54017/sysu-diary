@@ -5,18 +5,38 @@ module.exports = (function() {
     const http = require('http');
     const https = require('https');
 
+    function getBorrowingDate(date) {
+        var year = parseInt(date.substr(0, 4)),
+            month = parseInt(date.substr(4, 2)),
+            day = parseInt(date.substr(6, 2));
+        if (month <= 2) {
+            month = month + 12 - 2;
+            year -= 1;
+        } else {
+            month -= 2;
+        }
+
+        return {
+            year: year,
+            month: month,
+            day: day
+        }
+    }
+
 
     function handle(text) {
-        var name, total, dates = {}, date;
-        var re_name, re_total, re_book;
-        var match_name, match_total, match_book;
+        console.log(text);
+        var name, total, dates = {}, date, first_book_time, book, first_book_name;
+        var re_name, re_total, re_book_date, re_book_name;
+        var match_name, match_total, match_book_date, match_book_name;
         re_name = new RegExp("[\u4e00-\u9fa5]{3}\\s-\\s([\u4e00-\u9fa5]{2,4})[\u4e00-\u9fa5]{9}");
         re_total = new RegExp("[\u4e00-\u9fa5]{2}(\\s)+(\\d+)");
-        re_book = new RegExp("[\\D](\\d{8})[\\D]", "gm");
+        re_book_date = new RegExp("[\\D](\\d{8})[\\D]", "gm");
+        re_book_name = new RegExp("<td\\sclass=td1\\svalign=top><a.*?>(.*?)</a></td>", "gm")
 
         match_name = re_name.exec(text);
         match_total = re_total.exec(text);
-        match_book = re_book.exec(text);
+        //match_book = re_book_date.exec(text);
         if(match_name) {
             name = match_name[1];
         } else {
@@ -27,24 +47,48 @@ module.exports = (function() {
         } else {
             console.error("Something wrong QAQ");
         }
-        var i = 1;
-        while ((date = re_book.exec(text)) !== null) {
+
+        var i = 0, temp = [];
+        // get all book dates
+        while ((date = re_book_date.exec(text)) !== null) {
             if(i%2) {
-            var year = date[1].substr(0, 4);
+                var year = date[1].substr(0, 4);
                 if(!dates[year]) {
                     dates[year] = [];
                 }
                 dates[year].push(date[1]);
             }
             i++;
+            temp.push(date[1])
         }
+        // get first book date
+        if (temp.length >= 2) {
+            first_book_time = getBorrowingDate(temp[temp.length-2]);
+        } else {
+            first_book_time = {year: "ooxx", month: "o", day: "x"};
+        }
+        
         for (var year in dates) {
             dates[year] = dates[year].length;
+        }
+
+        temp = [];
+        // get all books
+        while ((book = re_book_name.exec(text)) !== null) {
+            temp.push(book[1])
+        }
+        // get first book name
+        if (!temp.length) {
+            first_book_name = "同学你还没有借过书哦"
+        } else {
+            first_book_name = temp[temp.length-1]
         }
         return {
             name: name,
             total: total,
-            list: dates
+            list: dates,
+            first_book_time: first_book_time,
+            first_book_name: first_book_name
         }
     }
 
