@@ -52,16 +52,13 @@
 
 		__webpack_require__(12);
 
-		var flag = 1, type ="", chinese, typeTwo = "";
+		var flag = 1;
 
-		var $cards = $('#cards'),
-			$schools = $('#schools'),
+		var $logMask = $('#log-mask'),
 			$books = $('#books'),
-			$logMask = $('#log-mask'),
-			$bookMask = $('#book-mask'),
-			$moneyMask = $('#money-mask'),
-			$type = $('#type'),
-			cur;
+			$time = $('#first-time'),
+			$first = $('#first-book'),
+			$days = $('#days');
 
 		$('.wp-inner').fullpage({
 			duration: 0,
@@ -86,28 +83,14 @@
 			$.post("/book", { username: this.username, password: this.password }, function(data) {
 				if (data.bookCode === 0) {
 					$books.text(data.bookSum);
+					$time.text(data.time);
+					$first.text("《" + data.bookName + "》");
+					$days.text(data.days);
 					resolve();
 				} else {
 					reject();
 				}
 			});
-		}
-
-		Ajax.prototype.getPay = function(resolve, reject) {
-			console.log("get pay", this.username);
-			try {
-			$.post("/pay", { username: this.username, password: this.password }, function(data) {
-				if (data.payCode === 0) {
-					$schools.text(data.paySum);
-					resolve();
-				} else {
-					console.log("reject");
-					reject();
-				}
-			});
-			} catch(e) {
-				console.log("eereer: ", e);
-			}
 		}
 
 		$('#bt').tap(function() {
@@ -118,79 +101,26 @@
 			var username = $('#username').val(),
 				password = $('#password').val();
 			var ajax = new Ajax(username, password);
-			if (typeTwo === 'money') {
-				if ($schools.text() === '*****') {
-					new Promise(ajax.getPay.bind(ajax)).then(function() {
-						$.fn.fullpage.moveTo(4);
-						$logMask.addClass('hidden');
-						flag = 1;
-						$.fn.fullpage.start();
-					}).catch(function() {
-						$logMask.removeClass('hidden');
-						flag = 1;
-						$.fn.fullpage.start();
-					});
-				}
-			} else if (typeTwo === 'book') {
-				new Promise(ajax.getBook.bind(ajax)).then(function() {
-					$.fn.fullpage.moveTo(3);
-					$logMask.addClass('hidden');
-					flag = 1;
-					$.fn.fullpage.start();
-				}).catch(function(e) {
-					$logMask.removeClass('hidden');
-					flag = 1;
-					$.fn.fullpage.start();
-				});
-			} else {
-				$.post("/data", { username: username, password: password }, function(data) {
-					console.log(data);
-					flag = 1;
-					$.fn.fullpage.start();
-					$.fn.fullpage.moveNext(true);
-					if (data.payCode === 0) {
-						$schools.text(data.paySum.toFixed(2));
-					} else {
-						$schools.text("*****");
-						$moneyMask.removeClass('hidden');
-					}
-					if (data.bookCode === 0) {
-						$books.text(data.bookSum);
-					} else {
-						$books.text("*****");
-						$bookMask.removeClass('hidden');
-					}
-					$('#days').text(data.days);
-				});
-			}
+			new Promise(ajax.getBook.bind(ajax)).then(function() {
+				$.fn.fullpage.moveTo(2, true);
+				$logMask.addClass('hidden');
+				flag = 1;
+				$.fn.fullpage.start();
+			}).catch(function(e) {
+				$logMask.removeClass('hidden');
+				flag = 1;
+				$.fn.fullpage.start();
+			});
 		});
 
 		$('.reput').tap(function() {
-			type = this.getAttribute('data-type');
-			typeTwo = typeTwo || type;
-			console.log(type, typeTwo);
-			if (type === 'book') {
-				chinese = '借阅';
-				cur = 3;
-			} else if(type === 'money') {
-				chinese = '学杂费'
-				cur = 4;
-			} else {
-				$logMask.removeClass('hidden');
-			}
-			$('#' + type + '-mask').addClass('hidden');
-			$('.warn').html('无法获取你的<span id="type">' + chinese + '</span>纪录');
-			$.fn.fullpage.moveTo(1);
+			$logMask.addClass('hidden');
 		});
 
-		$('.jump').tap(function() {
-			$('#logMask').addClass('hidden');
-			$.fn.fullpage.moveNext(true);
-		});
 
 		$('#first-jump').tap(function() {
-			$('#logMask').addClass('hidden');
-			$.fn.fullpage.moveTo(cur);
+			$logMask.addClass('hidden');
+			$.fn.fullpage.moveTo(3);
 		})
 
 	}());
@@ -230,7 +160,7 @@
 
 
 	// module
-	exports.push([module.id, ".fullPage-wp{   \n    -webkit-transform: translate3d(0,0,0);     \n    transform: translate3d(0,0,0);     \n}\n.fullPage-wp:after {\n    display: block;\n    content: ' ';\n    height: 0;\n    clear: both;\n}\n.fullPage-wp.anim{\n    -webkit-transition: all 500ms ease-out 0s;\n    transition: all 500ms ease-out 0s; \n}\n.fullPage-page{\n    display: block;\n    overflow: hidden;\n}\n\n.fullPage-dir-h {\n    float: left;\n}\n\n.wp {\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    overflow: hidden;\n}\n\n.page {\n    text-align: center;\n    position: relative;\n    background-color: rgba(16, 31, 64, 1);\n    background-size: 100% 100%;\n}\n\ninput {\n    border-top-style: none;\n    border-right-style: none;\n    border-left-style: none;\n    border-bottom: 1px solid #ccc;\n    background-color: transparent;\n    outline: none;\n    width: 65%;\n    color: white;\n    font-size: 16px;\n    height: 25px;\n    margin-left: 15px;\n}\n\n.page1 {\n    background-image: url(" + __webpack_require__(4) + ");\n}\n\n.page2 {\n    background-image: url(" + __webpack_require__(5) + ");\n}\n\n.page3 {\n    background-image: url(" + __webpack_require__(6) + ");\n}\n\n.page4 {\n    background-image: url(" + __webpack_require__(7) + ");\n}\n\n.page5 {\n    background-image: url(" + __webpack_require__(8) + ");\n}\n\n.page6 {\n    background-image: url(" + __webpack_require__(9) + ");\n    background-position: bottom;\n}\n\n\n.arrow {\n\tposition: absolute;\n    bottom: 20px;\n    left: 45%;\n    width: 10%;\n    -webkit-animation: arrow 1.5s linear infinite;\n}\n\n@-webkit-keyframes arrow {\n    0%    {opacity: 0; -webkit-transform: translate3d(0, 0, 0);}\n    100%  {opacity: 1; -webkit-transform: translate3d(0, -20px, 0);}\n}\n\n.message {\n\tcolor: white;\n\tfont-size: 16px;\n\tposition: absolute;\n\twidth: 300px;\n\tleft: 50%;\n\tmargin-left: -150px;\n}\n\n.page3 .message {\n\tbottom: 65px;\n}\n\n.money {\n\tfont-size: 36px;\n\tmargin-top: 12px;\n}\n\n#days, #books, #cards, #schools {\n\tcolor: rgba(249, 115, 17, 1);\n\tfont-size: 36px;\n}\n\n#percent {\n\tcolor: rgba(249, 115, 17, 1);\n}\n\n.page4 .message {\n\ttop: 60px;\n}\n\n.page5 .message {\n\ttop: 60px ;\n}\n\n.page6 {\n    background-size: 100% auto;\n    background-repeat: no-repeat;\n}\n\n.warn {\n    position: absolute;\n    top: 20%;\n    width: 100%;\n    text-align: center;\n    color: #ccc;\n    font-size: 14px;\n}\n\n.form {\n    position: relative;\n    top: 35%;\n    color: white;\n    width: 70%;\n    margin: 0 auto;\n}\n\n#bt {\n    margin-top: 30px;\n    border: 1px solid white;\n    width: 100%;\n    display: block;\n    border-radius: 20px;\n    height: 42px;\n    line-height: 42px;\n}\n\n\n\n.show {\n    visibility: visible;\n}\n\n.mask {\n    height: 100%;\n    position: absolute;\n    width: 100%;\n    background-color: rgba(47, 47, 47, 0.5);\n    top: 0;\n}\n\n.toast {\n    position: absolute;\n    bottom: 33%;\n    left: 50%;\n    margin-left: -125px;\n    color: #ccc;\n    width: 250px;\n    font-size: 14px;\n}\n\n.toast img {\n    width: 250px;\n}\n\n.toast .retry {\n    position: absolute;\n    text-align: center;\n    margin: auto;\n    top: 5px;\n    right: 0;\n    bottom: 0;\n    left: 0;\n}\n\n.reput, .jump {\n    display: block;\n    width: 125px;\n    height: 50px;\n    position: absolute;\n    margin-top: -46px;\n    line-height: 46px;\n}\n\n.reput {\n    left: 0;\n}\n\n.jump {\n    right: 0;\n}\n\n.hidden {\n    visibility: hidden;\n}\n\n.building {\n    width: 60%;\n    position: absolute;\n    margin: auto;\n    top: 80px;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    -webkit-animation: building 4s linear infinite;\n}\n\n@-webkit-keyframes building {\n    0%    { -webkit-transform: translate3d(0, 0, 0); }\n    50%  { -webkit-transform: translate3d(0, -20px, 0); }\n    100% { -webkit-transform: translate3d(0, 0, 0); }\n}\n\n\n\n\n", ""]);
+	exports.push([module.id, ".fullPage-wp{   \n    -webkit-transform: translate3d(0,0,0);     \n    transform: translate3d(0,0,0);     \n}\n.fullPage-wp:after {\n    display: block;\n    content: ' ';\n    height: 0;\n    clear: both;\n}\n.fullPage-wp.anim{\n    -webkit-transition: all 500ms ease-out 0s;\n    transition: all 500ms ease-out 0s; \n}\n.fullPage-page{\n    display: block;\n    overflow: hidden;\n}\n\n.fullPage-dir-h {\n    float: left;\n}\n\n.wp {\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    overflow: hidden;\n}\n\n.page {\n    text-align: center;\n    position: relative;\n    background-color: rgba(16, 31, 64, 1);\n    background-size: 100% 100%;\n}\n\ninput {\n    border-top-style: none;\n    border-right-style: none;\n    border-left-style: none;\n    border-bottom: 1px solid #ccc;\n    background-color: transparent;\n    outline: none;\n    width: 65%;\n    color: white;\n    font-size: 16px;\n    height: 25px;\n    margin-left: 15px;\n}\n\n.page1 {\n    background-image: url(" + __webpack_require__(4) + ");\n}\n\n.page2 {\n    background-image: url(" + __webpack_require__(5) + ");\n}\n\n.page3 {\n    background-image: url(" + __webpack_require__(6) + ");\n}\n\n.page4 {\n    background-image: url(" + __webpack_require__(7) + ");\n}\n\n.page5 {\n    background-image: url(" + __webpack_require__(8) + ");\n}\n\n.page6 {\n    background-image: url(" + __webpack_require__(9) + ");\n    background-position: bottom;\n}\n\n\n.arrow {\n\tposition: absolute;\n    bottom: 20px;\n    left: 45%;\n    width: 10%;\n    -webkit-animation: arrow 1.5s linear infinite;\n}\n\n@-webkit-keyframes arrow {\n    0%    {opacity: 0; -webkit-transform: translate3d(0, 0, 0);}\n    100%  {opacity: 1; -webkit-transform: translate3d(0, -20px, 0);}\n}\n\n.message {\n\tcolor: white;\n\tfont-size: 16px;\n\tposition: absolute;\n\twidth: 100%;\n\tleft: 50%;\n\tmargin-left: -50%;\n}\n\n.page3 .message {\n\tbottom: 65px;\n}\n\n#days, #books, #first-time, #first-book {\n\tcolor: rgba(249, 115, 17, 1);\n\tfont-size: 26px;\n}\n\n#percent {\n\tcolor: rgba(249, 115, 17, 1);\n}\n\n.page4 .message {\n\ttop: 60px;\n}\n\n.page5 .message {\n\ttop: 60px ;\n}\n\n.page6 {\n    background-size: 100% auto;\n    background-repeat: no-repeat;\n}\n\n.page8 {\n    color: white;\n}\n\n.warn {\n    position: absolute;\n    top: 20%;\n    width: 100%;\n    text-align: center;\n    color: #ccc;\n    font-size: 14px;\n}\n\n.form {\n    position: relative;\n    top: 35%;\n    color: white;\n    width: 70%;\n    margin: 0 auto;\n}\n\n#bt, .bt {\n    margin-top: 30px;\n    border: 1px solid white;\n    width: 100%;\n    display: block;\n    border-radius: 20px;\n    height: 42px;\n    line-height: 42px;\n}\n\n.bt {\n    width: 50%;\n    margin: 0 auto;\n    margin-top: 20px;\n}\n\n\n.show {\n    visibility: visible;\n}\n\n.mask {\n    height: 100%;\n    position: absolute;\n    width: 100%;\n    background-color: rgba(47, 47, 47, 0.5);\n    top: 0;\n}\n\n\n.reput {\n    left: 0;\n}\n\n\n.hidden {\n    visibility: hidden;\n}\n\n.building {\n    width: 60%;\n    position: absolute;\n    margin: auto;\n    top: 50px;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    -webkit-animation: building 4s linear infinite;\n}\n\n@-webkit-keyframes building {\n    0%    { -webkit-transform: translate3d(0, 0, 0); }\n    50%  { -webkit-transform: translate3d(0, -20px, 0); }\n    100% { -webkit-transform: translate3d(0, 0, 0); }\n}\n\n\n#english, #ads {\n    color: white;\n    font-size: 24px;\n    opacity: 0;\n}\n\n.page7 .message {\n    margin: auto;\n    position: absolute;\n    top: 45%;\n    width: 100%;\n    left: 50%;\n    margin-left: -50%;\n}\n\n\n.cur #english {\n    -webkit-animation: first-in 1s linear both;\n    opacity: 1;\n    margin-top: -30px;\n}\n\n.cur #ads {\n    opacity: 1;\n    -webkit-animation: second-in 1s 1s linear both;\n}\n\n@-webkit-keyframes first-in {\n    0% { opacity: 0 }\n    100% {opacity: 1 }\n}\n\n@-webkit-keyframes second-in {\n    0% { opacity: 0 }\n    100% {opacity: 1 }\n}\n\n.footer {\n    position: absolute;\n    bottom: 1px;\n    font-size: 10px;\n    color: #eee;\n    padding-right: 46px;\n    background-image: url(" + __webpack_require__(13) + ");\n    background-repeat: no-repeat;\n    background-size: auto 100%;\n    background-position: right;\n    height: 28px;\n    line-height: 30px;\n    left: 50%;\n    margin-left: -79px;\n}\n\n.book-bg {\n    width: 90%;\n}\n\n.page8 p:first-of-type {\n    margin-top: -25%;\n}\n\n.toast {\n    position: absolute;\n    bottom: 33%;\n    left: 50%;\n    margin-left: -125px;\n    color: #ccc;\n    width: 250px;\n    font-size: 14px;\n}\n\n.toast img {\n    width: 250px;\n}\n\n.toast .retry {\n    position: absolute;\n    text-align: center;\n    margin: auto;\n    top: 15px;\n    right: 0;\n    bottom: 0;\n    left: 0;\n}\n\n.reput {\n    display: block;\n    width: 250px;\n    height: 50px;\n    position: absolute;\n    margin-top: -46px;\n    line-height: 46px;\n}", ""]);
 
 	// exports
 
@@ -295,7 +225,7 @@
 /* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "904e24b4be1123012514aa4bf7464c25.png";
+	module.exports = __webpack_require__.p + "0f07f8b7d94eacccb8965aac9fe1c8f6.png";
 
 /***/ },
 /* 5 */
@@ -319,13 +249,13 @@
 /* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "8fd52800cefc8cfd888295457855ec42.png";
+	module.exports = __webpack_require__.p + "a229882159121b079dfaabf3f03093c9.png";
 
 /***/ },
 /* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__.p + "01cd2cfe0a2a14fbf14f982ca66e33ee.png";
+	module.exports = __webpack_require__.p + "a1177f3478c9c9155060cb48dec50170.png";
 
 /***/ },
 /* 10 */
@@ -832,6 +762,12 @@
 	    });
 	}(Zepto, window));
 
+
+/***/ },
+/* 13 */
+/***/ function(module, exports) {
+
+	module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAAAwCAMAAABqgKfnAAAC9FBMVEUAAADk7PH+/v7m8PH8/Pz+/v7+/v7+/f1wn+zx8vHw8vH+/v79/Pz6+vrx8fHv8fH5+fn6+vr29vb29fX09PT+/v78/Pz6+vrz8/P8/P39/f37+/v39/dIvdz4+Pj19fX29vX6+vrw8PD08/Pz8/P09PT08vLx8/P6+vr9/Pz7+vr5+fn5+Pb39/f////09PT19PP9/fz+/fz49/f19fX29vb19PT29vbw8PDu8vL5+flIu936+fn7+/v4+Phqoev19fX39/fx8fH7+fj19fX29vby8vL+/v401tQ00dP9/fxd5t37+vn09PQmy9P//v5T1tvw8PBu3uBnxOPv7+9h294w29P8/Pz+/vsgxtH+/v5Jud0Zw9Es09P+/v4lu9YqneI/z9VvoetvoetE4tj4+PhL1Npx6OEbzc094dY64dVFkOQx1tMlztFIu90k1dI529VP5NoZp9oYtNUfkOMdm98ii+UlrNw73dY+2dYjhuYmgOk319VK5NlroOv19PNqp+lLv91U19mD5uVtpO9Qxd1c4t1G0tlL1th35eNt5uBor+ts3OBBjex46OJ9uexs0eI439Q0ydIs0M8Ubuc30dI1s9lA4dYy3dM4vtYTduYcd+dCp99IoOE3uthCsN0fz89W4tte5t0putYavdEgguYhdupMud4+h+temulKm+RTteE3h+pCq9/s7Ow7jepA19aK6OZ25+Ju6OD///8+4dYg09A539UYz88y29Mq19IQyc1DmOJFleI9pd5Bm+E+ot88qN0Jw80s0NAfzs4UzM4DuM5Dg+VDhuQ/juM/n+A4w9Y3ztMPf+NAnuAMiuALkN46qd0Jldw6r9s4rds4tdo3sNo5vNgDpNU5ydQ10NISzM0MyM0Fvs0SeuYPcuZIjeRGkuNBi+NBiOM5rNwx0NEm0M8azc8EwswBvcwPeOVIj+QPheI2q9s2s9kHndg139QFq9Mm1tEk1NEFstALhOIDnNgBqtIn19EBsc88mt82str56J85AAAAtHRSTlMAAv4E1vvv54QZBurGug0KsZ9KRTb42r4V+O7exaqUYT05LiseGxIL5tHOqpyFhDEjybB7XltOQioix6uZjIqEgnJwbGlVJvPVzL++pKOhfF01JxEPB/7hzrirqqajoqGfjYWEgWVNIPr05eLhyLeysaempqWloqGfn56clpCKdXV1Z2FLSUA3MjAtIxkTEw8L+PPy8fHt7ejm4+Hd3NzZ08e/tbOtpqaIiIKAf2xnYFVSSDaUTm7aAAAFE0lEQVRIx63WZXATQRiA4e8kCXH3kIZokxACpYa7u7u7u7u7u7s7HFDc3d3d3f0Pe0dKjra0h7y/cpnsM3ubndmFZFXMp1DBf0jUSEdRlCRC9o8OUchL/Uj3b5YqOxVO10f4t45aSv2aIPBXVjk/TiVLnLvwnzpBJY9KDGe/Y5Gcmj9xXLm14bHSOIhTsJ55GYNcHUducXicXg109pwmKpwiMzcpa3iIBDmhsgX4VKgoNQFY2s76keAqI6DoyAgRsHIG6K95UTaACsv6pi3Nm9qwAsgKeNFe9ECSDPl9JYPIWd7iUO+0pRKvNzdvOBog1gAphAGMXTXryO1D6ThImzduRFYTSLkK/ebs3LWDs4Rq1islq1LZ2d/u7zzJWWLaPKXXcPi1sf2LHbt04RxXaT6SQjVrt4E9n/5Fj1+hpT0ndzzjIrV7vflnr8d1HQI/IsoW23c1JB3d/uwwB6lb5S2sKlduO5hZn2L79z34Q6nr562oz2+3hnr7tu3gxq0O7H/Ilu5wkWptoitabBOra9seJUrT+rU+s5ujdCAhIeFaT2zt3GvXEkJdOxCSxtcbCUu4SqWvb9u27Xppem1aXUefmRhp36R65QGgxpnduzhJNR/v3bv3MZJQjas9pp/20tL+CYyDpBe7d+24x0V6cuPGjSdICllP0PP1AweadkNOSNqJpAYcpIN0dSCxQQsPHtzbtNZQSCzHeY5Shy/v37//wkihhiyohhy2dHLHvfocpE9v3rz5REvskkp3OUjtL9N1gd+W/jzampykj69evfqYipSDkTisU6ezdHVTkS7SUh5Int39q3SaLhUp/cU9u7cfyQMFivssWWUQTma0AruOp+hSlc4wUkYqr59SYEA4hPQh5pBj+WwATqfBAG5hxcJI+vD8+fMPncGZmrSLlvgAOSmnTC8WqCCXWBwD5jIQreWLFWAVm3l5ofMJuu5Q3B/8nXQ/JMkhhsqWD89PegkjGev2GDMRJmkc3wJKPFYvgEVPb968+bQ7ZKG0SkeK0sv7O3cd6c3MqSRPptRWj8qJRZOmGMJYRkgVBEl2UBYBqwDWTL/19OatHkhCF5OAK2Xpa4uBaJ1yRVF50dlfKM4mKhSrVWA4mpMkwqiH2jiU4gOMWjnjFpKqUnTigDC59GJm3zEAfXxmSQSAJ6OZLITpSamDsBSAuCx6sR7yWiCrFABZSycuRtKPBAWTHOqtJ69ADisMUCJgUsUWpHIDqxEDMXP4ghkDBP1DggC6QSOALnPiZAkZAUxumwhymQTWJFdbLDpMeSGTLgIM3uJyCCcpBUzRVYp4f4xV4U7EySFZhoAgJEnQEkohGhfIRRlUBgCH2l4YCtkAy6CSayhlTEFP0CXSeNR4bJwHoJxKBk3atOnJtoQBU6IUacqmj6yC2aQ+r0htJLUKsGTCFHzS7o+kXyAyk5CnyYCTfD3kr2KRiIa929QSfimzUstI1f1Z/LpSApErrxSPV/pAKoXsmTJTKsCqkoxUxk1LrmhKSFqsVLby7zYVhSQ5SuJIilLmoxT5+WD1ZcXtStLt+yFFVJTnxxu51J5IaxBHUnxWnkGXpUAB+XBGSpqmeBaoXjKbUb1aDPn4JM9ejm/mR4ElF1aKJ9BgfpxnJnLzdMZyGbSRvFzQyETmhGEJCS0hheyY0wmFiYrxaI0LO+TumIJiK7MLNOh/h6DaBYQtc7xcHm/XAEC8SgijBwxYB2mXgSQVBkiz7x/xfxeWk0voAAAAAElFTkSuQmCC"
 
 /***/ }
 /******/ ]);

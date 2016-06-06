@@ -16,7 +16,7 @@
 				<p class="warn">请输入学号密码获取数据</p>
 				<div class="form">
 					<p class="in">学号 <input type="text" id="username" /></p>
-					<p class="in">密码 <input type="password" id="password" /></p>
+					<p class="in">密码 <input type="password" id="password" placeholder="******" /></p>
 					<a id="bt">L o g i n</a>
 				</div>
 				<div class="mask hidden" id="log-mask">
@@ -27,7 +27,6 @@
 							<p>请重新输入</p>
 						</div>
 						<span class="reput" data-type="log" >重新输入</span>
-						<span class="jump" id="first-jump">跳过</span>
 					</div>
 				</div>
 			</div>
@@ -44,39 +43,36 @@
 					<p><span id="books">10</span> 本</p>
 				</div>
 				<img class="arrow" src="./images/arrow.png">
-				<div class="mask hidden" id="book-mask">
-					<div class="toast">
-						<img src="./images/toast.png">
-						<div class="retry">
-							<p>当前页面信息来自另一个系统</p>
-							<p>请输入正确的学号密码获取</p>
-							<p>当前的页面信息</p>
-						</div>
-						<span class="reput" data-type="book">重新获取</span>
-						<span class="jump">跳过</span>
-					</div>
-				</div>
 			</div>
 			<div class="page page5">
 				<div class="message">
-					<p>学杂费</p>
-					<p class="money">¥<span id="schools"> 2131</span></p>
+					<p>第一次借书时间是</p>
+					<p><span id="first-time"></span></p>
+					<p>我借的第一本书是</p>
+					<p><span id="first-book"></span></p>
 				</div>
 				<img class="arrow" src="./images/arrow.png">
-				<div class="mask hidden" id="money-mask">
-					<div class="toast">
-						<img src="./images/toast.png">
-						<div class="retry">
-							<p>当前页面信息来自另一个系统</p>
-							<p>请输入正确的学号密码获取</p>
-							<p>当前的页面信息</p>
-						</div>
-						<span class="reput" data-type="money">重新获取</span>
-						<span class="jump">跳过</span>
-					</div>
-				</div>
 			</div>
 			<div class="page page6">
+			</div>
+			<div class="page page7">
+				<div class="message">
+					<p id="english">What's more?</p>
+					<p id="ads">没错，是广告</p>
+				</div>
+				<img class="arrow" src="./images/arrow.png">
+			</div>
+			<div class="page page8">
+				<img class="book-bg" src="./images/last-book.png">
+				<p>还有许许多多真实的数据</p>
+				<p>汇成了属于你的我的大学轨迹</p>
+				<p>承载着记忆中的那些人与事</p>
+				<p>《毕业纪·城北旧事》</p>
+				<p>永恒青春，一时珍藏</p>
+				<a class="bt">个性定制</a>
+				<p class="footer">
+					MC Design 诚意出品
+				<p>
 			</div>
 		</div>
 	</div>

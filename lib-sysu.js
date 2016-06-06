@@ -25,7 +25,6 @@ module.exports = (function() {
 
 
     function handle(text) {
-        console.log(text);
         var name, total, dates = {}, date, first_book_time, book, first_book_name;
         var re_name, re_total, re_book_date, re_book_name;
         var match_name, match_total, match_book_date, match_book_name;

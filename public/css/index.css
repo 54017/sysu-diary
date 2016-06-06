@@ -68,7 +68,7 @@ input {
 }
 
 .page5 {
-    background-image: url('../images/pay.png');
+    background-image: url('../images/book.png');
 }
 
 .page6 {
@@ -94,23 +94,18 @@ input {
 	color: white;
 	font-size: 16px;
 	position: absolute;
-	width: 300px;
+	width: 100%;
 	left: 50%;
-	margin-left: -150px;
+	margin-left: -50%;
 }
 
 .page3 .message {
 	bottom: 65px;
 }
 
-.money {
-	font-size: 36px;
-	margin-top: 12px;
-}
-
-#days, #books, #cards, #schools {
+#days, #books, #first-time, #first-book {
 	color: rgba(249, 115, 17, 1);
-	font-size: 36px;
+	font-size: 26px;
 }
 
 #percent {
@@ -130,6 +125,10 @@ input {
     background-repeat: no-repeat;
 }
 
+.page8 {
+    color: white;
+}
+
 .warn {
     position: absolute;
     top: 20%;
@@ -147,7 +146,7 @@ input {
     margin: 0 auto;
 }
 
-#bt {
+#bt, .bt {
     margin-top: 30px;
     border: 1px solid white;
     width: 100%;
@@ -157,6 +156,11 @@ input {
     line-height: 42px;
 }
 
+.bt {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 20px;
+}
 
 
 .show {
@@ -169,6 +173,95 @@ input {
     width: 100%;
     background-color: rgba(47, 47, 47, 0.5);
     top: 0;
+}
+
+
+.reput {
+    left: 0;
+}
+
+
+.hidden {
+    visibility: hidden;
+}
+
+.building {
+    width: 60%;
+    position: absolute;
+    margin: auto;
+    top: 50px;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    -webkit-animation: building 4s linear infinite;
+}
+
+@-webkit-keyframes building {
+    0%    { -webkit-transform: translate3d(0, 0, 0); }
+    50%  { -webkit-transform: translate3d(0, -20px, 0); }
+    100% { -webkit-transform: translate3d(0, 0, 0); }
+}
+
+
+#english, #ads {
+    color: white;
+    font-size: 24px;
+    opacity: 0;
+}
+
+.page7 .message {
+    margin: auto;
+    position: absolute;
+    top: 45%;
+    width: 100%;
+    left: 50%;
+    margin-left: -50%;
+}
+
+
+.cur #english {
+    -webkit-animation: first-in 1s linear both;
+    opacity: 1;
+    margin-top: -30px;
+}
+
+.cur #ads {
+    opacity: 1;
+    -webkit-animation: second-in 1s 1s linear both;
+}
+
+@-webkit-keyframes first-in {
+    0% { opacity: 0 }
+    100% {opacity: 1 }
+}
+
+@-webkit-keyframes second-in {
+    0% { opacity: 0 }
+    100% {opacity: 1 }
+}
+
+.footer {
+    position: absolute;
+    bottom: 1px;
+    font-size: 10px;
+    color: #eee;
+    padding-right: 46px;
+    background-image: url("../images/logo.png");
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+    background-position: right;
+    height: 28px;
+    line-height: 30px;
+    left: 50%;
+    margin-left: -79px;
+}
+
+.book-bg {
+    width: 90%;
+}
+
+.page8 p:first-of-type {
+    margin-top: -25%;
 }
 
 .toast {
@@ -189,50 +282,17 @@ input {
     position: absolute;
     text-align: center;
     margin: auto;
-    top: 5px;
+    top: 15px;
     right: 0;
     bottom: 0;
     left: 0;
 }
 
-.reput, .jump {
+.reput {
     display: block;
-    width: 125px;
+    width: 250px;
     height: 50px;
     position: absolute;
     margin-top: -46px;
     line-height: 46px;
 }
-
-.reput {
-    left: 0;
-}
-
-.jump {
-    right: 0;
-}
-
-.hidden {
-    visibility: hidden;
-}
-
-.building {
-    width: 60%;
-    position: absolute;
-    margin: auto;
-    top: 80px;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    -webkit-animation: building 4s linear infinite;
-}
-
-@-webkit-keyframes building {
-    0%    { -webkit-transform: translate3d(0, 0, 0); }
-    50%  { -webkit-transform: translate3d(0, -20px, 0); }
-    100% { -webkit-transform: translate3d(0, 0, 0); }
-}
-
-
-
-
