@@ -13,7 +13,7 @@
 		http = require('http').Server(app),
 		bodyParser = require('body-parser');
 
-	http.listen(80);
+	http.listen(3000);
 
 	//中间件提供静态资源 js/css/image 等， 会解析public文件夹下的文件
 	app.use(express.static(path.join(__dirname, 'public')));

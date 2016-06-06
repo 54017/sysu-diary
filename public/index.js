@@ -2,11 +2,9 @@
 
 	"use strict";
 
-	let $ = require('./zepto.min.js');
+	let $ = Zepto = require('./zepto.min.js');
 
 	require('./zepto.fullpage.js');
-
-	require('./touch.js');
 
 	let flag = 1, type ="", chinese, typeTwo = "";
 
