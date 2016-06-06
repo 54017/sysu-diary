@@ -1,14 +1,14 @@
 (function() {
 
-	"use strict";
+	require('./css/index.css');
 
-	let $ = Zepto = require('./zepto.min.js');
+	$ = Zepto = require('./zepto.min.js');
 
 	require('./zepto.fullpage.js');
 
-	let flag = 1, type ="", chinese, typeTwo = "";
+	var flag = 1, type ="", chinese, typeTwo = "";
 
-	let $cards = $('#cards'),
+	var $cards = $('#cards'),
 		$schools = $('#schools'),
 		$books = $('#books'),
 		$logMask = $('#log-mask'),
@@ -31,7 +31,7 @@
 		}
 	});
 
-	let Ajax = function(username, password) {
+	var Ajax = function(username, password) {
 		this.username = username;
 		this.password = password;
 	};
@@ -69,9 +69,9 @@
 			return;
 		}
 		flag = 0;
-		let username = $('#username').val(),
+		var username = $('#username').val(),
 			password = $('#password').val();
-		let ajax = new Ajax(username, password);
+		var ajax = new Ajax(username, password);
 		if (typeTwo === 'money') {
 			if ($schools.text() === '*****') {
 				new Promise(ajax.getPay.bind(ajax)).then(function() {
