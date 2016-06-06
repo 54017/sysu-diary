@@ -10,7 +10,7 @@
 
 	require('./touch.js');
 
-	let flag = 1, type ="";
+	let flag = 1, type ="", chinese;
 
 	let $cards = $('#cards'),
 		$schools = $('#schools'),
@@ -196,7 +196,6 @@
 
 	$('.reput').tap(function() {
 		type = this.getAttribute('data-type');
-		let chinese;
 		console.log(type);
 		if (type === 'book') {
 			chinese = '借阅';

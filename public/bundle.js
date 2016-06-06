@@ -54,9 +54,9 @@
 
 		__webpack_require__(3);
 
-		__webpack_require__(12);
+		__webpack_require__(13);
 
-		let flag = 1, type ="";
+		let flag = 1, type ="", chinese;
 
 		let $cards = $('#cards'),
 			$schools = $('#schools'),
@@ -242,7 +242,6 @@
 
 		$('.reput').tap(function() {
 			type = this.getAttribute('data-type');
-			let chinese;
 			console.log(type);
 			if (type === 'book') {
 				chinese = '借阅';
@@ -534,7 +533,7 @@
 	var content = __webpack_require__(4);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(11)(content, {});
+	var update = __webpack_require__(12)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -559,7 +558,7 @@
 
 
 	// module
-	exports.push([module.id, ".fullPage-wp{   \n    -webkit-transform: translate3d(0,0,0);     \n    transform: translate3d(0,0,0);     \n}\n.fullPage-wp:after {\n    display: block;\n    content: ' ';\n    height: 0;\n    clear: both;\n}\n.fullPage-wp.anim{\n    -webkit-transition: all 500ms ease-out 0s;\n    transition: all 500ms ease-out 0s; \n}\n.fullPage-page{\n    display: block;\n    overflow: hidden;\n}\n\n.fullPage-dir-h {\n    float: left;\n}\n\n.wp {\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    overflow: hidden;\n}\n\n.page {\n    text-align: center;\n    position: relative;\n    background-color: rgba(16, 31, 64, 1);\n    background-size: 100% 100%;\n}\n\ninput {\n    border-top-style: none;\n    border-right-style: none;\n    border-left-style: none;\n    border-bottom: 1px solid #ccc;\n    background-color: transparent;\n    outline: none;\n    width: 75%;\n    color: white;\n    font-size: 16px;\n    height: 25px;\n    margin-left: 15px;\n}\n\n.page1 {\n    background-image: url(" + __webpack_require__(6) + ");\n}\n\n.page2 {\n    background-image: url(" + __webpack_require__(7) + ");\n}\n\n.page3 {\n    background-image: url(" + __webpack_require__(8) + ");\n}\n\n.page4 {\n    background-image: url(" + __webpack_require__(9) + ");\n}\n\n.page5 {\n    background-image: url(" + __webpack_require__(10) + ");\n}\n\n.page6 {\n    background-image: url(" + __webpack_require__(13) + ");\n}\n\n\n.arrow {\n\tposition: absolute;\n    bottom: 20px;\n    left: 45%;\n    width: 10%;\n    -webkit-animation: arrow 1.5s linear infinite;\n}\n\n@-webkit-keyframes arrow {\n    0%    {opacity: 0; -webkit-transform: translate3d(0, 0, 0);}\n    100%  {opacity: 1; -webkit-transform: translate3d(0, -20px, 0);}\n}\n\n.message {\n\tcolor: white;\n\tfont-size: 16px;\n\tposition: absolute;\n\twidth: 300px;\n\tleft: 50%;\n\tmargin-left: -150px;\n}\n\n.page3 .message {\n\tbottom: 100px;\n}\n\n.money {\n\tfont-size: 36px;\n\tmargin-top: 12px;\n}\n\n#days, #books, #cards, #schools {\n\tcolor: rgba(249, 115, 17, 1);\n\tfont-size: 36px;\n}\n\n#percent {\n\tcolor: rgba(249, 115, 17, 1);\n}\n\n.page4 .message {\n\ttop: 100px;\n}\n\n.page5 .message {\n\ttop: 100px ;\n}\n\n.warn {\n    position: absolute;\n    top: 30%;\n    width: 100%;\n    text-align: center;\n    color: #ccc;\n    font-size: 14px;\n}\n\n.form {\n    position: relative;\n    top: 45%;\n    color: white;\n    width: 70%;\n    margin: 0 auto;\n}\n\n#bt {\n    margin-top: 30px;\n    border: 1px solid white;\n    width: 100%;\n    display: block;\n    border-radius: 20px;\n    height: 42px;\n    line-height: 42px;\n}\n\n\n\n.show {\n    visibility: visible;\n}\n\n.mask {\n    height: 100%;\n    position: absolute;\n    width: 100%;\n    background-color: rgba(47, 47, 47, 0.5);\n    top: 0;\n}\n\n.toast {\n    position: absolute;\n    bottom: 33%;\n    left: 50%;\n    margin-left: -125px;\n    color: #ccc;\n    width: 250px;\n    font-size: 14px;\n}\n\n.toast img {\n    width: 250px;\n\n}\n\n.toast .retry {\n    position: absolute;\n    text-align: center;\n    margin: auto;\n    top: 10px;\n    right: 0;\n    bottom: 0;\n    left: 0;\n}\n\n.reput, .jump {\n    display: block;\n    width: 125px;\n    height: 50px;\n    position: absolute;\n    margin-top: -46px;\n    line-height: 46px;\n}\n\n.reput {\n    left: 0;\n}\n\n.jump {\n    right: 0;\n}\n\n.hidden {\n    visibility: hidden;\n}\n\n.building {\n    width: 60%;\n    position: absolute;\n    margin: auto;\n    top: 80px;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    -webkit-animation: building 4s linear infinite;\n}\n\n@-webkit-keyframes building {\n    0%    { -webkit-transform: translate3d(0, 0, 0); }\n    50%  { -webkit-transform: translate3d(0, -20px, 0); }\n    100% { -webkit-transform: translate3d(0, 0, 0); }\n}\n\n\n\n\n", ""]);
+	exports.push([module.id, ".fullPage-wp{   \n    -webkit-transform: translate3d(0,0,0);     \n    transform: translate3d(0,0,0);     \n}\n.fullPage-wp:after {\n    display: block;\n    content: ' ';\n    height: 0;\n    clear: both;\n}\n.fullPage-wp.anim{\n    -webkit-transition: all 500ms ease-out 0s;\n    transition: all 500ms ease-out 0s; \n}\n.fullPage-page{\n    display: block;\n    overflow: hidden;\n}\n\n.fullPage-dir-h {\n    float: left;\n}\n\n.wp {\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    overflow: hidden;\n}\n\n.page {\n    text-align: center;\n    position: relative;\n    background-color: rgba(16, 31, 64, 1);\n    background-size: 100% 100%;\n}\n\ninput {\n    border-top-style: none;\n    border-right-style: none;\n    border-left-style: none;\n    border-bottom: 1px solid #ccc;\n    background-color: transparent;\n    outline: none;\n    width: 75%;\n    color: white;\n    font-size: 16px;\n    height: 25px;\n    margin-left: 15px;\n}\n\n.page1 {\n    background-image: url(" + __webpack_require__(6) + ");\n}\n\n.page2 {\n    background-image: url(" + __webpack_require__(7) + ");\n}\n\n.page3 {\n    background-image: url(" + __webpack_require__(8) + ");\n}\n\n.page4 {\n    background-image: url(" + __webpack_require__(9) + ");\n}\n\n.page5 {\n    background-image: url(" + __webpack_require__(10) + ");\n}\n\n.page6 {\n    background-image: url(" + __webpack_require__(11) + ");\n}\n\n\n.arrow {\n\tposition: absolute;\n    bottom: 20px;\n    left: 45%;\n    width: 10%;\n    -webkit-animation: arrow 1.5s linear infinite;\n}\n\n@-webkit-keyframes arrow {\n    0%    {opacity: 0; -webkit-transform: translate3d(0, 0, 0);}\n    100%  {opacity: 1; -webkit-transform: translate3d(0, -20px, 0);}\n}\n\n.message {\n\tcolor: white;\n\tfont-size: 16px;\n\tposition: absolute;\n\twidth: 300px;\n\tleft: 50%;\n\tmargin-left: -150px;\n}\n\n.page3 .message {\n\tbottom: 100px;\n}\n\n.money {\n\tfont-size: 36px;\n\tmargin-top: 12px;\n}\n\n#days, #books, #cards, #schools {\n\tcolor: rgba(249, 115, 17, 1);\n\tfont-size: 36px;\n}\n\n#percent {\n\tcolor: rgba(249, 115, 17, 1);\n}\n\n.page4 .message {\n\ttop: 100px;\n}\n\n.page5 .message {\n\ttop: 100px ;\n}\n\n.warn {\n    position: absolute;\n    top: 30%;\n    width: 100%;\n    text-align: center;\n    color: #ccc;\n    font-size: 14px;\n}\n\n.form {\n    position: relative;\n    top: 45%;\n    color: white;\n    width: 70%;\n    margin: 0 auto;\n}\n\n#bt {\n    margin-top: 30px;\n    border: 1px solid white;\n    width: 100%;\n    display: block;\n    border-radius: 20px;\n    height: 42px;\n    line-height: 42px;\n}\n\n\n\n.show {\n    visibility: visible;\n}\n\n.mask {\n    height: 100%;\n    position: absolute;\n    width: 100%;\n    background-color: rgba(47, 47, 47, 0.5);\n    top: 0;\n}\n\n.toast {\n    position: absolute;\n    bottom: 33%;\n    left: 50%;\n    margin-left: -125px;\n    color: #ccc;\n    width: 250px;\n    font-size: 14px;\n}\n\n.toast img {\n    width: 250px;\n\n}\n\n.toast .retry {\n    position: absolute;\n    text-align: center;\n    margin: auto;\n    top: 10px;\n    right: 0;\n    bottom: 0;\n    left: 0;\n}\n\n.reput, .jump {\n    display: block;\n    width: 125px;\n    height: 50px;\n    position: absolute;\n    margin-top: -46px;\n    line-height: 46px;\n}\n\n.reput {\n    left: 0;\n}\n\n.jump {\n    right: 0;\n}\n\n.hidden {\n    visibility: hidden;\n}\n\n.building {\n    width: 60%;\n    position: absolute;\n    margin: auto;\n    top: 80px;\n    right: 0;\n    left: 0;\n    bottom: 0;\n    -webkit-animation: building 4s linear infinite;\n}\n\n@-webkit-keyframes building {\n    0%    { -webkit-transform: translate3d(0, 0, 0); }\n    50%  { -webkit-transform: translate3d(0, -20px, 0); }\n    100% { -webkit-transform: translate3d(0, 0, 0); }\n}\n\n\n\n\n", ""]);
 
 	// exports
 
@@ -652,6 +651,12 @@
 
 /***/ },
 /* 11 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "07594b70174d8b3000044335b46558a7.png";
+
+/***/ },
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -903,7 +908,7 @@
 
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
 	//     Zepto.js
@@ -1072,12 +1077,6 @@
 	  })
 	})(Zepto)
 
-
-/***/ },
-/* 13 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "07594b70174d8b3000044335b46558a7.png";
 
 /***/ }
 /******/ ]);
