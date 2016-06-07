@@ -109,7 +109,7 @@ input {
 
 #days, #books, #first-time, #first-book {
 	color: rgba(249, 115, 17, 1);
-	font-size: 1.8rem;
+	font-size: 2rem;
 }
 
 #percent {
@@ -150,20 +150,20 @@ input {
     margin: 0 auto;
 }
 
-#bt, .bt {
+#bt {
     margin-top: 30px;
-    border: 1px solid white;
     width: 100%;
-    display: block;
-    border-radius: 20px;
-    height: 42px;
-    line-height: 42px;
 }
 
 .bt {
     width: 50%;
     margin: 0 auto;
     margin-top: 20px;
+    display: block;
+    border-radius: 20px;
+    height: 42px;
+    line-height: 42px;
+    border: 1px solid white;
 }
 
 
