@@ -46,7 +46,7 @@ input {
     outline: none;
     width: 65%;
     color: white;
-    font-size: 16px;
+    font-size: 1rem;
     height: 25px;
     margin-left: 15px;
 }
@@ -92,11 +92,15 @@ input {
 
 .message {
 	color: white;
-	font-size: 16px;
+	font-size: 1.2rem;
 	position: absolute;
 	width: 100%;
 	left: 50%;
 	margin-left: -50%;
+
+    opacity: 0.1;
+
+    transition: opacity 1.5s ease 0.5s, top 1.5s ease;
 }
 
 .page3 .message {
@@ -105,7 +109,7 @@ input {
 
 #days, #books, #first-time, #first-book {
 	color: rgba(249, 115, 17, 1);
-	font-size: 26px;
+	font-size: 1.8rem;
 }
 
 #percent {
@@ -135,7 +139,7 @@ input {
     width: 100%;
     text-align: center;
     color: #ccc;
-    font-size: 14px;
+    font-size: 1rem;
 }
 
 .form {
@@ -205,7 +209,7 @@ input {
 
 #english, #ads {
     color: white;
-    font-size: 24px;
+    font-size: 2rem;
     opacity: 0;
 }
 
@@ -243,7 +247,7 @@ input {
 .footer {
     position: absolute;
     bottom: 1px;
-    font-size: 10px;
+    font-size: 0.8rem;
     color: #eee;
     padding-right: 46px;
     background-image: url("../images/logo.png");
@@ -271,7 +275,7 @@ input {
     margin-left: -125px;
     color: #ccc;
     width: 250px;
-    font-size: 14px;
+    font-size: 0.7rem;
 }
 
 .toast img {
@@ -295,4 +299,37 @@ input {
     position: absolute;
     margin-top: -46px;
     line-height: 46px;
+}
+
+/**
+ *  added by ailin
+ */
+.page3 .message {
+    top: 75%;
+}
+
+.page3 .message.fade {
+    top: 72%;
+}
+
+.page4 .message {
+    top: 20%
+}
+
+.page4 .message.fade {
+    top: 15%;
+}
+
+.page5 .message {
+    top: 20%;
+}
+
+.page5 .message.fade {
+    top: 15%;
+}
+
+.message.fade {
+    opacity: 1;
+
+    transition: opacity 1.5s ease 0.5s, top 1.5s ease ;
 }

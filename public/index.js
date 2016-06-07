@@ -20,11 +20,15 @@
 			if (e.cur === 2 && e.next === 1) {
 				return false;
 			}
+
+			$(".page"+(e.cur+1) +" .message").removeClass("fade")
 		},
 		afterChange: function(e) {
 			if (e.cur === 1) {
 				$.fn.fullpage.stop();
 			}
+
+			$(".page"+(e.cur+1) +" .message").addClass("fade")
 		}
 	});
 
@@ -63,7 +67,8 @@
 		}).catch(function(e) {
 			$logMask.removeClass('hidden');
 			flag = 1;
-			$.fn.fullpage.start();
+			//$.fn.fullpage.start();
+			$.fn.fullpage.stop();
 		});
 	});
 
