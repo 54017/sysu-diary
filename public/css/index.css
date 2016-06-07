@@ -78,7 +78,7 @@ input {
 
 
 .arrow {
-	position: absolute;
+    position: absolute;
     bottom: 20px;
     left: 45%;
     width: 10%;
@@ -91,12 +91,12 @@ input {
 }
 
 .message {
-	color: white;
-	font-size: 1.2rem;
-	position: absolute;
-	width: 100%;
-	left: 50%;
-	margin-left: -50%;
+    color: white;
+    font-size: 1.2rem;
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    margin-left: -50%;
 
     opacity: 0.1;
 
@@ -104,24 +104,24 @@ input {
 }
 
 .page3 .message {
-	bottom: 65px;
+    bottom: 65px;
 }
 
 #days, #books, #first-time, #first-book {
-	color: rgba(249, 115, 17, 1);
-	font-size: 2rem;
+    color: rgba(249, 115, 17, 1);
+    font-size: 1.8rem;
 }
 
 #percent {
-	color: rgba(249, 115, 17, 1);
+    color: rgba(249, 115, 17, 1);
 }
 
 .page4 .message {
-	top: 60px;
+    top: 60px;
 }
 
 .page5 .message {
-	top: 60px ;
+    top: 60px ;
 }
 
 .page6 {
@@ -164,6 +164,8 @@ input {
     height: 42px;
     line-height: 42px;
     border: 1px solid white;
+    text-decoration: none;
+    color: white;
 }
 
 
@@ -308,28 +310,28 @@ input {
     top: 75%;
 }
 
-.page3 .message.fade {
+/*.page3 .message.fade {
     top: 72%;
-}
+}*/
 
 .page4 .message {
-    top: 20%
+    top: 15%
 }
 
-.page4 .message.fade {
+/*.page4 .message.fade {
     top: 15%;
 }
-
+*/
 .page5 .message {
-    top: 20%;
+    top: 6%;
 }
 
-.page5 .message.fade {
+/*.page5 .message.fade {
     top: 15%;
 }
-
+*/
 .message.fade {
     opacity: 1;
 
-    transition: opacity 1.5s ease 0.5s, top 1.5s ease ;
+    transition: opacity 1.5s ease 0.5s;
 }
