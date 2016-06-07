@@ -109,7 +109,7 @@ input {
 
 #days, #books, #first-time, #first-book {
 	color: rgba(249, 115, 17, 1);
-	font-size: 2rem;
+	font-size: 1.8rem;
 }
 
 #percent {
@@ -308,28 +308,28 @@ input {
     top: 75%;
 }
 
-.page3 .message.fade {
+/*.page3 .message.fade {
     top: 72%;
-}
+}*/
 
 .page4 .message {
     top: 20%
 }
 
-.page4 .message.fade {
+/*.page4 .message.fade {
     top: 15%;
 }
-
+*/
 .page5 .message {
     top: 20%;
 }
 
-.page5 .message.fade {
+/*.page5 .message.fade {
     top: 15%;
 }
-
+*/
 .message.fade {
     opacity: 1;
 
-    transition: opacity 1.5s ease 0.5s, top 1.5s ease ;
+    transition: opacity 1.5s ease 0.5s;
 }
