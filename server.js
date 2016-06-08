@@ -10,7 +10,7 @@
 		http = require('http').Server(app),
 		bodyParser = require('body-parser');
 
-	http.listen(80);
+	http.listen(3000);
 
 	//中间件提供静态资源 js/css/image 等， 会解析public文件夹下的文件
 	app.use(express.static(path.join(__dirname, 'public')));
@@ -24,6 +24,7 @@
 	app.post('/book', function(req, res) {
 		let username = req.body.username,
 			password = req.body.password;
+		console.log(username);
 		username = username ? username : '0000';
 		password = password ? password : '0000';
 		console.log('username', username);

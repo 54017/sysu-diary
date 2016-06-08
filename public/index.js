@@ -1,7 +1,5 @@
 (function() {
 
-	require('./css/index.css');
-
 	$ = Zepto = require('./zepto.min.js');
 
 	require('./zepto.fullpage.js');
