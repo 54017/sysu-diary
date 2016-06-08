@@ -29,7 +29,8 @@ module.exports = (function() {
         var re_name, re_total, re_book_date, re_book_name;
         var match_name, match_total, match_book_date, match_book_name;
         re_name = new RegExp("[\u4e00-\u9fa5]{3}\\s-\\s([\u4e00-\u9fa5]{2,4})[\u4e00-\u9fa5]{9}");
-        re_total = new RegExp("[\u4e00-\u9fa5]{2}(\\s)+(\\d+)");
+        //re_total = new RegExp("[\u4e00-\u9fa5]{2}(\\s)+(\\d+)");
+        re_total = new RegExp("[\u4e00-\u9fa5]{3}(\\s)+-(\\s)+(\\d+)");
         re_book_date = new RegExp("[\\D](\\d{8})[\\D]", "gm");
         re_book_name = new RegExp("<td\\sclass=td1\\svalign=top><a.*?>(.*?)</a></td>", "gm")
 
@@ -39,12 +40,12 @@ module.exports = (function() {
         if(match_name) {
             name = match_name[1];
         } else {
-            console.error("Something wrong QAQ");
+            console.error("Something wrong at name-matching QAQ");
         }
         if(match_total) {
-            total = match_total[2];
+            total = match_total[3];
         } else {
-            console.error("Something wrong QAQ");
+            console.error("Something wrong at total-matching QAQ");
         }
 
         var i = 0, temp = [];
