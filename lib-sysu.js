@@ -238,6 +238,3 @@ module.exports = (function() {
     return init;
 
 }())
-
-
-
