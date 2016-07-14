@@ -1,2 +1,4 @@
-node_modules/ 
-log.txt
+./chat/chat-front/node_modules/ 
+./chat/chat-end/node_modules/
+./chat/log
+./diary/node_modules
