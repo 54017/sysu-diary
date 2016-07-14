@@ -1,0 +1,13 @@
+2015-12-04 01:11:05,237 CRIT Supervisor running as root (no user in config file)
+2015-12-04 01:11:05,242 INFO daemonizing the supervisord process
+2015-12-04 01:11:05,243 INFO supervisord started with pid 8615
+2015-12-04 01:11:06,246 INFO spawned: 'chat' with pid 8616
+2015-12-04 01:11:06,550 INFO exited: chat (exit status 1; not expected)
+2015-12-04 01:11:07,553 INFO spawned: 'chat' with pid 8621
+2015-12-04 01:11:07,714 INFO exited: chat (exit status 1; not expected)
+2015-12-04 01:11:09,718 INFO spawned: 'chat' with pid 8627
+2015-12-04 01:11:09,889 INFO exited: chat (exit status 1; not expected)
+2015-12-04 01:11:12,892 INFO spawned: 'chat' with pid 8632
+2015-12-04 01:11:13,058 INFO exited: chat (exit status 1; not expected)
+2015-12-04 01:11:14,059 INFO gave up: chat entered FATAL state, too many start retries too quickly
+2015-12-04 01:12:49,313 WARN received SIGTERM indicating exit request
