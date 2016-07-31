@@ -11,6 +11,6 @@ module.exports = {
             { test: /\.less$/, loader: 'style!css!less!'},
             { test: /\.(png|jpg|jpeg)$/, loader: 'url?limit=8192'}
         ]
-    }//,
-    //devtool: "source-map"
+    },
+    devtool: "source-map"
 };

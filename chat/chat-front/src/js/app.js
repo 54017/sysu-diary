@@ -3,8 +3,8 @@ var ReactDOM = require('react-dom');
 
 require("../less/index.less");
 
-//var url = "localhost:3000";
-var url = "ohhhhh.xyz:3000";
+var url = "localhost:3000";
+//var url = "ohhhhh.xyz:3000";
 //var api = "http://ohhhhh.xyz:3000";
 
 var ChatWin = require("./chatWin.js");
