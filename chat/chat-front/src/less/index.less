@@ -135,3 +135,85 @@ body, html {
         opacity: 1;
     }
 }
+
+
+//======================
+// responsitive style
+@media screen, (max-width: 800px) {
+    html {
+        height: 100%;
+        width: 100%;
+
+        body {
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            top: 0;
+
+            #container {
+                position: fixed;
+                height: 100%;
+                width: 100%;
+                top: 0;
+
+                .chat-container {
+                    width: 100%;
+                    margin: 0 auto;
+                    height: 100%;
+                    padding: 0.5rem;
+                    border-radius: 0;
+                    background-color: @cute-white;
+                    box-shadow: 0px 0px 1rem @cute-gray;
+                    position: relative;
+
+                    .chat-window {
+                        height: 100%;
+                        overflow-y: scroll;
+                        margin-bottom: 0.2rem;
+                        padding-top: 0.2rem;
+                    }
+
+                    .input-bar {
+                        width: 100%;
+                        position: relative;
+                        bottom: 2.95rem;
+                         & > * {
+                            height: 1.8rem;
+                            font-size: 1rem;
+                        }
+                        input {
+                            width: 85%;
+                            padding: 0.4em;
+                            border: none;
+
+                            &:focus {
+                                box-shadow: 0 0 5px @cute-bling-blue;
+                            }
+                        }
+                        button {
+                            width: 15%;
+                            background-color: @cute-dark-blue;
+                            color: @cute-white;
+                            border: none;
+                        }
+                    }
+
+                    .online-box {
+                        position: absolute;
+                        top: 3em;
+                        right: -10em;
+                        color: @cute-white;
+                        & > span {
+                            background-color: @cute-dark-blue;
+                            padding: 0.3em;
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+}
+
+
